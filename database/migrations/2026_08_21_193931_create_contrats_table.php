@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('contrats', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('employe_id')->constrained('employes')->onDelete('cascade');
+            $table->string('typeContrat');
+            $table->date('dateDebut');
+            $table->date('dateFin')->nullable();
+            $table->decimal('salaire', 10, 2);
+            $table->string('statut')->default('actif');
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('contrats');
+    }
+};

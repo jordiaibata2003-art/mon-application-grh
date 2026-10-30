@@ -1,0 +1,20 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\EmployeController;
+use App\Http\Controllers\Api\ContratController;
+use App\Http\Controllers\Api\CongeController;
+use App\Http\Controllers\Api\PaieController;
+use App\Http\Controllers\Api\PresenceController;
+use App\Http\Controllers\Api\AuthController;
+
+// Routes publiques (sans authentification) — pour tester
+Route::apiResource('employes', EmployeController::class);
+Route::apiResource('contrats', ContratController::class);
+Route::apiResource('conges', CongeController::class);
+Route::apiResource('paies', PaieController::class);
+Route::apiResource('presences', PresenceController::class);
+
+// Authentification
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);

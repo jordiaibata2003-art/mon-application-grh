@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Models;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Utilisateur extends Authenticatable
+{
+    use HasApiTokens; 
+    protected $table = 'utilisateurs';
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'nomUtilisateur', 'email', 'motDePasse', 'statut', 'profil_id', 'employe_id'
+    ];
+
+    protected $hidden = [
+        'motDePasse',
+    ];
+
+    public function profil()
+    {
+        return $this->belongsTo(Profil::class);
+    }
+
+    public function employe()
+    {
+        return $this->belongsTo(Employe::class);
+    }
+}
